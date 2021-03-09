@@ -1,3 +1,9 @@
+
+### GET ALL PRODUCT
+GET http://localhost:3000/products
+Accept: application/json
+
+### DELETE USER
 DELETE http://localhost:3000/user/delete/sukmawijaya
 Content-Type: application/x-www-form-urlencoded
 

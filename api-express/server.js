@@ -1,8 +1,22 @@
 const express = require('express')
 const fs = require('fs')
 const app = express()
+
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+// use res.render to load up an ejs view file
+
 //this line is required to parse the request body
 app.use(express.json())
+
+/*USER*/
+app.get('/', (req, res) => {
+    const users = getUserData()
+    res.render('pages/index', {
+        users: users
+    });
+})
+
 /* Create - POST method */
 app.post('/user/add', (req, res) => {
     //get the existing user data
@@ -26,11 +40,13 @@ app.post('/user/add', (req, res) => {
     saveUserData(existUsers);
     res.send({success: true, msg: 'User data added successfully'})
 })
+
 /* Read - GET method */
 app.get('/user/list', (req, res) => {
     const users = getUserData()
     res.send(users)
 })
+
 /* Update - Patch method */
 app.patch('/user/update/:username', (req, res) => {
     //get the username from url
@@ -52,6 +68,7 @@ app.patch('/user/update/:username', (req, res) => {
     saveUserData(updateUser)
     res.send({success: true, msg: 'User data updated successfully'})
 })
+
 /* Delete - Delete method */
 app.delete('/user/delete/:username', (req, res) => {
     const username = req.params.username
@@ -67,19 +84,45 @@ app.delete('/user/delete/:username', (req, res) => {
     res.send({success: true, msg: 'User removed successfully'})
 
 })
+
 /* util functions */
 //read the user data from json file
 const saveUserData = (data) => {
     const stringifyData = JSON.stringify(data)
-    fs.writeFileSync('users.json', stringifyData)
+    fs.writeFileSync('data/users.json', stringifyData)
 }
+
 //get the user data from json file
 const getUserData = () => {
-    const jsonData = fs.readFileSync('users.json')
+    const jsonData = fs.readFileSync('data/users.json')
     return JSON.parse(jsonData)
 }
+/*END USER*/
+
+/*PRODUCT*/
+//get data product.ejs
+/* Read - GET method */
+app.get('/product/list', (req, res) => {
+    const products = getProductData()
+    res.send(products)
+})
+
+app.get('/product', function(req, res) {
+    const products = getProductData()
+    res.render('pages/product', {
+        products: products
+    });
+});
+
+const getProductData = () => {
+    const jsonData = fs.readFileSync('data/product.json')
+    return JSON.parse(jsonData)
+}
+
+/*ENDP RODUCT*/
+
 /* util functions ends */
-//configure the server port
+//configure the app port
 app.listen(3000, () => {
-    console.log('Server runs on port 3000')
+    console.log('app runs on port 3000')
 })
