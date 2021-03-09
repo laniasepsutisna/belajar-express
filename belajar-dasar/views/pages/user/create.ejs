@@ -1,0 +1,26 @@
+<%- include('../../components/header') %>
+
+<h3>Form Create User</h3>
+<form action="/users" method="post">
+    <div class="input-group">
+        <label>Name</label>
+        <input type="text" name="name">
+    </div>
+
+    <div class="input-group">
+        <label>Email</label>
+        <input type="text" name="email">
+    </div>
+
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" name="password">
+    </div>
+
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+<%- include('../../components/footer') %>
+

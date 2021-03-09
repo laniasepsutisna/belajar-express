@@ -1,0 +1,30 @@
+<%- include('../../components/header') %>
+
+<h3>Form Edit User</h3>
+<form action="/users/<%= user._id %>/update" method="POST">
+    <div class="input-group">
+        <label>Name</label>
+        <input type="text" name="name" value="<%= user.name %>">
+        <input type="hidden" name="_id" value="<%= user._id %>">
+        <input type="hidden" name="_method" value="put">
+    </div>
+
+    <div class="input-group">
+        <label>Email</label>
+        <input type="text" name="email" value="<%= user.email %>">
+    </div>
+
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" name="password" value="<%= user.password %>">
+    </div>
+
+    <div>
+        <a href="/users">Kembali</a>
+        <button type="submit">Update</button>
+
+    </div>
+</form>
+
+<%- include('../../components/footer') %>
+

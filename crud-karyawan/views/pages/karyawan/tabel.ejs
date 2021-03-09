@@ -1,0 +1,36 @@
+<thead>
+<tr>
+    <th>#</th>
+    <th>Nama</th>
+    <th>Email</th>
+    <th>NPP</th>
+    <th>Jabatan</th>
+    <th>Entitas</th>
+    <th>Aksi</th>
+</tr>
+</thead>
+<tbody>
+<% for(let i = 0; i < karyawan.length; i++){ %>
+    <tr>
+        <td><%= i +1 %></td>
+        <td><%= karyawan[i].nama %></td>
+        <td><%= karyawan[i].email %></td>
+        <td><%= karyawan[i].npp %></td>
+        <td><%= karyawan[i].jabatan %></td>
+        <td><%= karyawan[i].entitas %></td>
+        <td class="text-center">
+            <a
+                    href="javascript:void()"
+                    class="btn btn-outline-warning btn-sm button-update"
+                    data-id="<%= karyawan[i].id %>"
+                    data-nama="<%= karyawan[i].nama %>"
+                    data-email="<%= karyawan[i].email %>"
+                    data-npp="<%= karyawan[i].npp %>"
+                    data-jabatan="<%= karyawan[i].jabatan %>"
+                    data-entitas="<%= karyawan[i].entitas %>"
+            ><i class="align-middle" data-feather="edit"></i></a>
+            <button type="submit" class="btn btn-outline-danger btn-sm button-update"><i class="align-middle" data-feather="trash"></i></button>
+        </td>
+    </tr>
+<% } %>
+</tbody>

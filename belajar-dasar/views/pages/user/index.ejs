@@ -1,0 +1,20 @@
+<%- include('../../components/header') %>
+
+<h3>Daftar User (<%= users.length %>)</h3>
+<a href="/users/create">Register</a>
+<form action="/users">
+    <input type="text" name="keyword">
+    <button type="submit">Cari</button>
+</form>
+<ul>
+    <% if(users.length > 0){ %>
+        <% users.forEach(function (user){ %>
+            <li><a href="users/<%= user._id %>"><%= user.name.toUpperCase() %></a></li>
+        <% }) %>
+    <%} else {%>
+        <li>Data User Kosong</li>
+    <% } %>
+</ul>
+
+<%- include('../../components/footer') %>
+

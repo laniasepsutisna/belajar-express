@@ -1,0 +1,15 @@
+<%- include('../../components/header') %>
+
+<h3>Show User</h3>
+<a href="/users">Kembali</a>
+
+<ul>
+    <li>Nama: <strong><%= user.name %></strong></li>
+    <li>Email: <strong><%= user.email %></strong></li>
+</ul>
+
+<a href="/users/<%= user._id %>/edit">Edit</a>
+<a href="/users/<%= user._id %>">Delete</a>
+
+<%- include('../../components/footer') %>
+

@@ -1,0 +1,117 @@
+<%- include ../../layouts/header %>
+
+<main class="content">
+    <div class="container-fluid p-0">
+        <h1 class="h3 mb-3">Karyawan</h1>
+
+        <% if(alert.message != "") { %>
+        <div class="alert alert-<%= alert.status %> alert-dismissible" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert-message">
+                <strong>Hello there!</strong> <%= alert.message %>
+            </div>
+        </div>
+        <% } %>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-actions float-end">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-modal">
+                                <i class="align-middle" data-feather="plus"></i>Tambah
+                            </button>
+                        </div>
+                        <h2 class="card-title">List Data Karyawan</h2>
+                        <h6 class="card-subtitle text-muted">Berikut ini adalah list data karyawan yang telah disimpan didalam aplikasi ini.</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="dataTable" class="table table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>NPP</th>
+                                    <th>Jabatan</th>
+                                    <th>Entitas</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <% for(let i = 0; i < karyawan.length; i++){ %>
+                                <tr>
+                                    <td><%= i +1 %></td>
+                                    <td><%= karyawan[i].nama %></td>
+                                    <td><%= karyawan[i].email %></td>
+                                    <td><%= karyawan[i].npp %></td>
+                                    <td><%= karyawan[i].jabatan %></td>
+                                    <td><%= karyawan[i].entitas %></td>
+                                    <td class="text-center">
+                                        <a
+                                           href="javascript:click()"
+                                           class="btn btn-outline-warning btn-sm button-update"
+                                           data-id="<%= karyawan[i].id %>"
+                                           data-nama="<%= karyawan[i].nama %>"
+                                           data-email="<%= karyawan[i].email %>"
+                                           data-npp="<%= karyawan[i].npp %>"
+                                           data-jabatan="<%= karyawan[i].jabatan %>"
+                                           data-entitas="<%= karyawan[i].entitas %>"
+                                        ><i class="align-middle" data-feather="edit"></i></a>
+                                        <button type="submit" class="btn btn-outline-danger btn-sm button-update"><i class="align-middle" data-feather="trash"></i></button>
+                                    </td>
+                                </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Add Modal -->
+<%- include('add_modal.ejs') %>
+<!-- Edit Modal -->
+<%- include('edit_modal.ejs') %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        $("#dataTable").DataTable({
+            pageLength: 6,
+            lengthChange: false,
+            bFilter: true,
+            autoWidth: false
+        });
+
+        click function() {
+            alert("Hello World")
+        }
+
+        $("#dataTable").on("click", ".button-update", function () {
+            // membuat variabel untuk mengambil data-id, data-name, dstnya yang sudah dibuat di file table.ejs di bagian tag a edit
+            // let id = $(this).data("id");
+            // let nama = $(this).data("nama");
+            // let nim = $(this).data("nim");
+            // let jurusan = $(this).data("jurusan");
+            // let alamat = $(this).data("alamat");
+            /*
+             * memanggil id edit-modal yang ada di file edit_modal.ejs
+             * dan membuat fungsi dari method
+             */
+            $("#edit-modal").modal("show");
+            /* Lalu Mengirim  id, name, dstnya melalu class disamping form-control tag input
+               dan valuenya mengambil dari setiap let yang dideklarasikan di atas */
+            // $(".id").val(id);
+            // $(".nama").val(nama);
+            // $(".nim").val(nim);
+            // $(".jurusan").val(jurusan);
+            // $(".alamat").val(alamat);
+        });
+    });
+</script>
+
+<%- include ../../layouts/footer %>

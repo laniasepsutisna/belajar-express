@@ -1,0 +1,32 @@
+DELETE http://localhost:3000/user/delete/sukmawijaya
+Content-Type: application/x-www-form-urlencoded
+
+### UPDATE USER
+PATCH http://localhost:3000/user/update/sukmawijaya
+Content-Type: application/json
+
+{
+  "username": "sukmawijaya",
+  "password": "secret2",
+  "fullname": "Sukma Wijaya2",
+  "age": 272
+}
+
+### GET ALL USER
+GET http://localhost:3000/user/list
+Accept: application/json
+
+### ADD USER
+POST http://localhost:3000/user/add
+Content-Type: application/json
+
+{
+  "username": "akbarnugraha",
+  "password": "secret",
+  "fullname": "M. Akbar Nugraha",
+  "age": 27
+}
+
+###
+
+
