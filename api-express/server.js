@@ -1,6 +1,12 @@
 const express = require('express')
 const fs = require('fs')
+const { v4: uuidv4 } = require('uuid');
 const app = express()
+
+// set middleware form
+app.use(express.urlencoded({
+    extended: true
+}));
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -100,26 +106,63 @@ const getUserData = () => {
 /*END USER*/
 
 /*PRODUCT*/
-//get data product.ejs
-/* Read - GET method */
-app.get('/product/list', (req, res) => {
-    const products = getProductData()
-    res.send(products)
-})
-
+/* Get List Product */
 app.get('/product', function(req, res) {
     const products = getProductData()
-    res.render('pages/product', {
+    res.render('pages/product/index', {
         products: products
     });
 });
 
+/* Get List Product */
 const getProductData = () => {
     const jsonData = fs.readFileSync('data/product.json')
     return JSON.parse(jsonData)
 }
 
-/*ENDP RODUCT*/
+/* Add Product */
+app.post('/product/add', (req, res) => {
+    //get the existing user data
+    const existProducts = getProductData()
+
+    //get the new user data from post request
+    const productData = {
+        id : uuidv4(),
+        name : req.body.name,
+        desc : req.body.desc,
+        price : req.body.price,
+    };
+
+    //append the user data
+    existProducts.push(productData)
+    //save the new user data
+    saveProductData(existProducts);
+    res.redirect('/product');
+});
+
+//save data product to json file
+const saveProductData = (data) => {
+    const stringifyData = JSON.stringify(data)
+    fs.writeFileSync('data/product.json', stringifyData)
+}
+
+/* Edit Product */
+app.get('/product/edit/:id', (req, res) => {
+    //get the username from url
+    const id_product = req.params.id
+    // //get the existing user data
+    const existProducts = getProductData()
+    //check if the username exist or not
+    const findExist = existProducts.find( product => product.id === id_product )
+    console.log(findExist);
+
+    res.render('pages/product/edit', {
+        product: findExist,
+        products: existProducts
+    });
+})
+
+/*END PRODUCT*/
 
 /* util functions ends */
 //configure the app port

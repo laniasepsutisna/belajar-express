@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include('../partials/head'); %>
+    <%- include('../../partials/head'); %>
 </head>
 <body class="container" class="bg-light">
 
 <header>
-    <%- include('../partials/header'); %>
+    <%- include('../../partials/header'); %>
 </header>
 
 <main>
@@ -24,34 +24,36 @@
             </h4>
             <ul class="list-group mb-3">
                 <% products.forEach(function(product) { %>
-                <li class="list-group-item d-flex justify-content-between lh-sm">
-                    <div>
-                        <h6 class="my-0"><%= product.name %></h6>
-                        <small class="text-muted"><%= product.desc %></small>
-                    </div>
-                    <span class="text-muted">Rp.<%= product.price %></span>
-                </li>
+                    <a href="product/edit/<%= product.id %>" class="text-decoration-none text-dark">
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0"><%= product.name %></h6>
+                                <small class="text-muted"><%= product.desc %></small>
+                            </div>
+                            <span class="text-muted">Rp.<%= product.price %></span>
+                        </li>
+                    </a>
                 <% }); %>
             </ul>
         </div>
 
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Form Product</h4>
-            <form class="needs-validation" novalidate="">
+            <form class="needs-validation" action="product/add" method="POST">
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="firstName" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Nama Produk">
-                    </div>
-
-                    <div class="col-sm-6">
-                        <label for="firstName" class="form-label">Description</label>
-                        <input type="text" class="form-control" name="desc" placeholder="Deskripsi Produk">
+                        <input type="text" class="form-control" name="name" placeholder="Nama Produk"  required>
                     </div>
 
                     <div class="col-sm-6">
                         <label for="firstName" class="form-label">Price</label>
-                        <input type="text" class="form-control" name="pice" placeholder="Harga Produk">
+                        <input type="number" class="form-control" name="price" placeholder="Harga Produk" required>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label for="firstName" class="form-label">Description</label>
+                        <textarea type="text" class="form-control" name="desc" placeholder="Deskripsi Produk" required cols="2" rows="2"></textarea>
                     </div>
 
                     <div class="col-12">
@@ -66,7 +68,7 @@
 </main>
 
 <footer>
-    <%- include('../partials/footer'); %>
+    <%- include('../../partials/footer'); %>
 </footer>
 
 </body>

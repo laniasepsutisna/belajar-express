@@ -1,7 +1,17 @@
 
 ### GET ALL PRODUCT
-GET http://localhost:3000/products
+GET http://localhost:3000/product
 Accept: application/json
+
+### ADD PRODUCT
+POST http://localhost:3000/product/add
+Content-Type: application/json
+
+{
+  "name": "Baju Kebaya",
+  "desc": "Baju kebaya terbaru untuk perempuan",
+  "price": 120000
+}
 
 ### DELETE USER
 DELETE http://localhost:3000/user/delete/sukmawijaya
