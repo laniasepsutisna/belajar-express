@@ -3,6 +3,11 @@ const fs = require('fs')
 const { v4: uuidv4 } = require('uuid');
 const app = express()
 
+//TODO Pembuatan update produk
+//TODO Pembuatan delete produk
+//TODO Transkaksi Pembelian
+//TODO Reporting invoice pembelian
+
 // set middleware form
 app.use(express.urlencoded({
     extended: true
