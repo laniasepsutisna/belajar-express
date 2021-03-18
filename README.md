@@ -1,1 +1,3 @@
-"# belajar-express" 
+Tutorial install project:
+
+- npm install
